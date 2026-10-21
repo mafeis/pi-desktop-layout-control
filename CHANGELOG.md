@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.2
+
+- The composer button lost its border and background — only the icon is left, and it grew from 14 to 18 px.
+- The icon is a solid glyph now (content block plus solid arrows), which stays readable at toolbar size.
+- 中文：工具栏按钮去掉边框与底色，只留图标；图标从 14px 放大到 18px，并改成实心图形，工具栏尺寸下不再糊。
+
 ## 0.1.1
 
 - The composer button is a plain layout icon now: a content container with arrows pointing out to the side gutters. No number on it.

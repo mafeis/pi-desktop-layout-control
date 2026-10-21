@@ -133,25 +133,23 @@ const STYLE_CHROME = `
 .pio-trigger {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  height: 26px;
-  padding: 0 8px;
-  border: 1px solid var(--ds-border-subtle, color-mix(in oklab, currentColor 20%, transparent));
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 0;
   border-radius: var(--radius-md, 8px);
   background: transparent;
   color: var(--ds-text-secondary, inherit);
   font: inherit;
-  font-size: var(--text-sm, 12px);
   line-height: 1;
-  white-space: nowrap;
   cursor: pointer;
   -webkit-app-region: no-drag;
 }
 .pio-trigger:hover { background: var(--ds-tile, var(--ds-raised, rgba(127,127,127,.14))); color: var(--ds-text-primary, inherit); }
 .pio-trigger:focus-visible { outline: 2px solid var(--ds-accent, currentColor); outline-offset: 2px; }
-.pio-trigger[data-on="false"] { opacity: .5; }
-.pio-trigger[data-on="true"] { border-color: color-mix(in oklab, var(--ds-accent, currentColor) 40%, transparent); }
-.pio-trigger-icon { display: block; opacity: .8; }
+.pio-trigger[data-on="false"] { opacity: .45; }
+.pio-trigger-icon { display: block; width: 18px; height: 18px; opacity: .9; }
 
 .pio-pop {
   position: fixed;
@@ -625,21 +623,15 @@ function LayoutTrigger() {
       {
         className: "pio-trigger-icon",
         viewBox: "0 0 16 16",
-        width: "14",
-        height: "14",
-        fill: "none",
-        stroke: "currentColor",
-        strokeWidth: "1.5",
-        strokeLinecap: "round",
-        strokeLinejoin: "round",
+        width: "18",
+        height: "18",
+        fill: "currentColor",
         "aria-hidden": "true",
         focusable: "false",
       },
-      React.createElement("rect", { x: "6.2", y: "3.4", width: "3.6", height: "9.2", rx: "1.2" }),
-      React.createElement("path", { d: "M5 8H1.9" }),
-      React.createElement("path", { d: "M3.3 6.4 1.7 8l1.6 1.6" }),
-      React.createElement("path", { d: "M11 8h3.1" }),
-      React.createElement("path", { d: "M12.7 6.4 14.3 8l-1.6 1.6" }),
+      // 实心正文块 + 两侧实心箭头：18px 下也不糊，外框已去掉。
+      React.createElement("rect", { x: "6.1", y: "4.6", width: "3.8", height: "6.8", rx: "1.5" }),
+      React.createElement("path", { d: "M5.1 8 3 6.1v3.8zM10.9 8 13 6.1v3.8z" }),
     ),
   );
 }
