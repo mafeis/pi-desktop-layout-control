@@ -151,8 +151,7 @@ const STYLE_CHROME = `
 .pio-trigger:focus-visible { outline: 2px solid var(--ds-accent, currentColor); outline-offset: 2px; }
 .pio-trigger[data-on="false"] { opacity: .5; }
 .pio-trigger[data-on="true"] { border-color: color-mix(in oklab, var(--ds-accent, currentColor) 40%, transparent); }
-.pio-trigger-glyph { font-size: 13px; opacity: .75; }
-.pio-trigger-label { font-variant-numeric: tabular-nums; }
+.pio-trigger-icon { display: block; opacity: .8; }
 
 .pio-pop {
   position: fixed;
@@ -165,7 +164,9 @@ const STYLE_CHROME = `
   padding: 12px;
   border: 1px solid var(--ds-border-default, var(--ds-border-subtle, rgba(127,127,127,.25)));
   border-radius: var(--radius-lg, 12px);
-  background: var(--ds-bg-elevated-primary, var(--ds-bg-secondary, #1c1c1e));
+  background-color: var(--pio-pop-solid, #1c1c1e);
+  background-image: linear-gradient(var(--ds-bg-elevated-primary, transparent), var(--ds-bg-elevated-primary, transparent));
+  backdrop-filter: none;
   color: var(--ds-text-primary, inherit);
   box-shadow: var(--ds-shadow-composer, 0 8px 30px rgba(0,0,0,.28));
   font-size: var(--text-sm, 12px);
@@ -516,6 +517,7 @@ function openPopover(anchor) {
   anchorNode = anchor;
   layer = api.ui.openLayer();
   const root = el("div", { class: "pio-pop", role: "dialog", "aria-label": t("popoverTitle"), tabindex: "-1" });
+  root.style.setProperty("--pio-pop-solid", solidBackdrop());
   buildPopover(root);
   layer.element.appendChild(root);
   layerRoot = root;
@@ -564,17 +566,27 @@ function onTriggerClick(event) {
 
 /* ---------- 输入框工具栏按钮 ---------- */
 
-function labelOf() {
-  if (!config.enabled) return t("off");
-  const width = effectiveWidth();
-  return width === 0 ? t("fullWidth") : String(width);
-}
-
-/** 按钮的悬浮说明：把侧栏加成说清楚，免得数字比滑杆大一圈看不懂。 */
+/** 图标本身不写字，当前宽度与侧栏加成都在悬浮说明里说清楚。 */
 function titleOf() {
   const bonus = sidebarBonus();
-  if (bonus > 0) return t("tooltipBonus", { n: bonus });
-  return t("tooltip");
+  const width = effectiveWidth();
+  const size = !config.enabled ? t("off") : width === 0 ? t("fullWidth") : `${width}px`;
+  const base = bonus > 0 ? t("tooltipBonus", { n: bonus }) : t("tooltip");
+  return `${base} · ${size}`;
+}
+
+/** 面板必须不透明：取最外层的实色背景当底衬，主题色再叠一层上去。 */
+function solidBackdrop() {
+  const nodes = [document.querySelector(".main-pane"), document.querySelector(".app-shell"), document.body, document.documentElement];
+  for (const node of nodes) {
+    if (!node) continue;
+    const color = getComputedStyle(node).backgroundColor;
+    if (!color || color === "transparent") continue;
+    const parts = color.replace(/^rgba?\(|\)$/g, "").split(",");
+    if (parts.length === 4 && Number(parts[3]) < 1) continue;
+    return color;
+  }
+  return "#1c1c1e";
 }
 
 function LayoutTrigger() {
@@ -608,8 +620,25 @@ function LayoutTrigger() {
       title: titleOf(),
       onClick: onTriggerClick,
     },
-    React.createElement("span", { className: "pio-trigger-glyph", "aria-hidden": "true" }, "⇔"),
-    React.createElement("span", { className: "pio-trigger-label" }, labelOf()),
+    React.createElement(
+      "svg",
+      {
+        className: "pio-trigger-icon",
+        viewBox: "0 0 16 16",
+        width: "14",
+        height: "14",
+        fill: "none",
+        stroke: "currentColor",
+        strokeWidth: "1.5",
+        strokeLinecap: "round",
+        strokeLinejoin: "round",
+        "aria-hidden": "true",
+        focusable: "false",
+      },
+      React.createElement("path", { d: "M2.5 8h11" }),
+      React.createElement("path", { d: "M5.6 4.6 2.2 8l3.4 3.4" }),
+      React.createElement("path", { d: "M10.4 4.6 13.8 8l-3.4 3.4" }),
+    ),
   );
 }
 
