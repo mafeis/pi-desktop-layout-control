@@ -18,7 +18,7 @@
  */
 import React from "react";
 
-const DEFAULT_CONFIG = { width: 1200, gutter: 24, enabled: true, followSidebar: true };
+const DEFAULT_CONFIG = { width: 1200, gutter: 24, enabled: true, followSidebar: true, showTrigger: true };
 
 const MIN_WIDTH = 640;
 const MAX_WIDTH = 2400;
@@ -252,6 +252,7 @@ function normalize(raw) {
     gutter: normalizeGutter(src.gutter ?? DEFAULT_CONFIG.gutter),
     enabled: normalizeEnabled(src.enabled),
     followSidebar: normalizeEnabled(src.followSidebar, DEFAULT_CONFIG.followSidebar),
+    showTrigger: normalizeEnabled(src.showTrigger, DEFAULT_CONFIG.showTrigger),
   };
 }
 
@@ -318,6 +319,8 @@ function setConfig(patch) {
   config = normalize({ ...config, ...patch });
   applyConfig();
   if (triggerNode) triggerNode.dataset.on = String(config.enabled);
+  // 快捷图标被关掉后，弹出的面板就没了锚点，顺手收起来。
+  if (!config.showTrigger && layer) closePopover();
   forceRender();
   refreshPopover();
   scheduleSave();
@@ -605,6 +608,10 @@ function LayoutTrigger() {
       triggerNode = null;
     };
   }, []);
+
+  // 设置在设置页里可以关掉这个图标；关掉后不放任何东西进工具栏。
+  // 注意 hooks 必须都跑完再返回，所以判断放在这里。
+  if (!config.showTrigger) return null;
 
   return React.createElement(
     "button",

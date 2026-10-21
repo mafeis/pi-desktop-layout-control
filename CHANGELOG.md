@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.3
+
+- New setting `showTrigger`: turn the composer shortcut icon off and on from the plugin settings page.
+- Hiding the icon closes the panel it anchors and leaves the toolbar untouched; the width override keeps working.
+- 中文：新增设置 `showTrigger`，可在插件设置页关闭/开启输入框里的快捷图标；关闭时自动收起面板，宽度覆盖照常生效。
+
 ## 0.1.2
 
 - The composer button lost its border and background — only the icon is left, and it grew from 14 to 18 px.

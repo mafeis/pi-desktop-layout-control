@@ -6,7 +6,7 @@
  * 因为只有渲染器那一侧能碰到 PI-Desktop 自己的文档。
  */
 
-const DEFAULT_CONFIG = { width: 1200, gutter: 24, enabled: true, followSidebar: true };
+const DEFAULT_CONFIG = { width: 1200, gutter: 24, enabled: true, followSidebar: true, showTrigger: true };
 const MIN_WIDTH = 640;
 const MAX_WIDTH = 2400;
 const MIN_GUTTER = 8;
@@ -44,6 +44,7 @@ function normalize(raw) {
     gutter: normalizeGutter(src.gutter ?? DEFAULT_CONFIG.gutter),
     enabled: normalizeEnabled(src.enabled),
     followSidebar: normalizeEnabled(src.followSidebar, DEFAULT_CONFIG.followSidebar),
+    showTrigger: normalizeEnabled(src.showTrigger, DEFAULT_CONFIG.showTrigger),
   };
 }
 

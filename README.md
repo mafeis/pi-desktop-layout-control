@@ -21,7 +21,9 @@ PI-Desktop caps conversation content at 760px (`.main-pane` → `--chat-content-
 
 The last line of the panel, "measured content width", is the real measured value — proof the override landed.
 
-The same four values are plugin settings (`width` / `gutter` / `enabled` / `followSidebar`), so editing them on the settings page works too; those edits reach the UI the next time you open the panel or reload the plugin.
+The same values are plugin settings (`width` / `gutter` / `enabled` / `followSidebar` / `showTrigger`), so editing them on the settings page works too; those edits reach the UI the next time you open the panel or reload the plugin.
+
+`showTrigger` turns the composer shortcut icon off. That is the only way to open the panel, so flip it back from the settings page — the width override keeps working while the icon is hidden.
 
 ## How it works
 
