@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "id": "io.github.mafeis.layout-control",
+  "name": "Layout Control",
+  "version": "0.1.0",
+  "description": "Control the conversation layout: content width (presets, custom, full-width) and side gutters, adjustable from a composer toolbar button; the choice is saved with the plugin.",
+  "author": "mafeis",
+  "license": "MIT",
+  "homepage": "https://github.com/mafeis/pi-desktop-layout-control",
+  "repository": "https://github.com/mafeis/pi-desktop-layout-control",
+  "categories": [
+    "productivity"
+  ],
+  "keywords": [
+    "layout",
+    "width",
+    "chat",
+    "composer",
+    "ui",
+    "宽度",
+    "布局"
+  ],
+  "changelog": "0.1.0\n- Control the conversation content width from the composer toolbar: presets 760 / 960 / 1200 / 1440 / full width, or any value between 640 and 2400\n- Adjustable side gutters between 8 and 56 px\n- Follows the sidebar: widen automatically while the sidebar is collapsed\n- Respects the native width drag handles and adopts the width you drag out\n- Panel shows the measured width of the real transcript column",
+  "i18n": {
+    "en": {
+      "name": "Layout Control",
+      "description": "Control the conversation layout: content width (presets, custom, full-width) and side gutters, adjustable from a composer toolbar button; the choice is saved with the plugin.",
+      "safetyNotes": "Only writes one style element and CSS custom properties on the host document root, and reads the app shell's sidebar class and width to keep the adjustment in step. renderer.extension is flagged high risk because the extension runs in the host document; this plugin does not read transcript or draft text, does not use internal IPC, sends nothing off the device and registers no agent tools."
+    },
+    "zh-CN": {
+      "name": "布局控制",
+      "description": "控制会话界面布局：会话内容宽度（预设 / 自定义 / 满宽，含左右留白），在输入框工具栏一键调节，设置随插件保存。",
+      "safetyNotes": "只在宿主文档根节点上写入一个 style 元素和 CSS 自定义属性，并读取应用外壳的侧栏类名与宽度以同步加宽。renderer.extension 因运行在宿主文档中被标为高风险；本插件不读取消息或输入框正文、不使用内部 IPC、不联网、不注册 Agent 工具。"
+    }
+  },
+  "main": "main.js",
+  "renderer": "renderer/index.mjs",
+  "rendererActions": ["plugin.call"],
+  "rendererCallMethods": ["getLayoutConfig", "setLayoutConfig"],
+  "permissions": ["renderer.extension"],
+  "contributes": {
+    "settings": [
+      {
+        "key": "width",
+        "type": "number",
+        "default": 1200,
+        "title": "会话内容宽度 / Content width (px, 0 = full width)"
+      },
+      {
+        "key": "gutter",
+        "type": "number",
+        "default": 24,
+        "title": "内容左右留白 / Side gutter (px)"
+      },
+      {
+        "key": "enabled",
+        "type": "boolean",
+        "default": true,
+        "title": "启用布局覆盖 / Enable layout override"
+      },
+      {
+        "key": "followSidebar",
+        "type": "boolean",
+        "default": true,
+        "title": "侧栏收起时自动加宽 / Widen when the sidebar is collapsed"
+      }
+    ]
+  },
+  "engines": {
+    "piDesktop": ">=0.9.0"
+  },
+  "activationEvents": ["onStartup"]
+}
