@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "io.github.mafeis.layout-control",
   "name": "Layout Control",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Control the conversation layout: content width (presets, custom, full-width) and side gutters, adjustable from a composer toolbar button; the choice is saved with the plugin.",
   "author": "mafeis",
   "license": "MIT",
@@ -20,7 +20,7 @@
     "宽度",
     "布局"
   ],
-  "changelog": "0.1.0\n- Control the conversation content width from the composer toolbar: presets 760 / 960 / 1200 / 1440 / full width, or any value between 640 and 2400\n- Adjustable side gutters between 8 and 56 px\n- Follows the sidebar: widen automatically while the sidebar is collapsed\n- Respects the native width drag handles and adopts the width you drag out\n- Panel shows the measured width of the real transcript column",
+  "changelog": "0.1.1\n- The composer button is now a plain layout icon: a content container with arrows pointing out to the side gutters, no number on it\n- The current width, and any sidebar bonus, moved into the button's tooltip\n0.1.0\n- Control the conversation content width from the composer toolbar: presets 760 / 960 / 1200 / 1440 / full width, or any value between 640 and 2400\n- Adjustable side gutters between 8 and 56 px\n- Follows the sidebar: widen automatically while the sidebar is collapsed\n- Respects the native width drag handles and adopts the width you drag out\n- Panel shows the measured width of the real transcript column",
   "i18n": {
     "en": {
       "name": "Layout Control",

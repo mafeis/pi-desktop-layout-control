@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.1
+
+- The composer button is a plain layout icon now: a content container with arrows pointing out to the side gutters. No number on it.
+- The current width, and any sidebar bonus, moved into the button's tooltip.
+- 中文：工具栏按钮换成「内容容器 + 两侧向外箭头」的布局图标，不再显示数字；当前宽度与侧栏加成移到悬浮提示里。
+
 ## 0.1.0
 
 First release.

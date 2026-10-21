@@ -635,9 +635,11 @@ function LayoutTrigger() {
         "aria-hidden": "true",
         focusable: "false",
       },
-      React.createElement("path", { d: "M2.5 8h11" }),
-      React.createElement("path", { d: "M5.6 4.6 2.2 8l3.4 3.4" }),
-      React.createElement("path", { d: "M10.4 4.6 13.8 8l-3.4 3.4" }),
+      React.createElement("rect", { x: "6.2", y: "3.4", width: "3.6", height: "9.2", rx: "1.2" }),
+      React.createElement("path", { d: "M5 8H1.9" }),
+      React.createElement("path", { d: "M3.3 6.4 1.7 8l1.6 1.6" }),
+      React.createElement("path", { d: "M11 8h3.1" }),
+      React.createElement("path", { d: "M12.7 6.4 14.3 8l-1.6 1.6" }),
     ),
   );
 }
